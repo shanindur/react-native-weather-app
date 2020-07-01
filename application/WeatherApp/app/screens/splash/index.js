@@ -10,10 +10,11 @@
 
 import React from 'react';
 import {SafeAreaView, ImageBackground } from 'react-native';
+import styles from './styles';
 
 const App = () => (
 	<SafeAreaView>
-		<ImageBackground style={{height: '100%', width: '100%'}} source={require('../../assets/images/splash.jpg')}/>
+		<ImageBackground style={styles.background} source={require('../../assets/images/splash.jpg')}/>
 	</SafeAreaView>
 );
 
