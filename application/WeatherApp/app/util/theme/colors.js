@@ -1,7 +1,8 @@
 export default {
-	primaryBlue: '#278de7',
+	primaryColour: '#900C3F',
+	secondaryColour: '#FFFFFF',
 	white: '#FFFFFF',
-	primaryBlack: '#020202',
+	black: '#000000',
 
 	primaryFont: '#9ea3ac',
 	primaryIcon: '#6c6c74',
