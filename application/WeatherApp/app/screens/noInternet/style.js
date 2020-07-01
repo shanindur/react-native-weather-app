@@ -1,9 +1,11 @@
 /**
- * No Internet styles
+ * Weather App
  *
- * @author       Amil Waduwawara
- * @version      1.0.0 2020-May-02
- * @copyright    Omobio (Pvt.) Ltd., Sri Lanka.
+ * No Internet Screen -> Style
+ *
+ * @author       Shanindu Rajapaksha
+ *
+ * @version      0.1.0 2020-Jun-29
  */
 import { StyleSheet } from 'react-native';
 
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
 
 	titleText: {
 		fontSize: 5 + fonts.extraLarge,
-		color: colors.primaryBlue,
+		color: colors.primaryColour,
 		fontWeight: 'bold'
 	},
 
