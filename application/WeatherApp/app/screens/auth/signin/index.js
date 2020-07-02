@@ -8,93 +8,60 @@
  * @version      0.1.0 2020-Jun-30
  */
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaView, View, Text, TextInput, Image, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { showMessage } from 'react-native-flash-message';
 import * as yup from 'yup';
 import { Formik } from 'formik';
-// import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 import { SquareButton, RoundButton } from '../../../components';
-import { colors, constants } from '../../../util';
-import { authService, storageService, userService } from '../../../services';
-// import { useStore } from '../../../store';
+import { Colors, Constants } from '../../../util';
+import { StorageService } from '../../../services';
 import styles from './styles';
+import { SET_SIGN_OUT_STATE, SET_SIGN_IN_STATE } from '../../../redux/actions/actionType';
 
 const SignIn = props => {
-	// const { dispatch } = useStore();
-
-	// const { params: { resetPassword} } = props.route;
+	const dispatch = useDispatch();
+	const {isSignedIn} = useSelector(state => state);
 
 	const [ showPassword, setShowPassword ] = useState(false);
 	const [ userSigningIn, setUserSigningIn ] = useState(false);
 
-	// const isFocused = useIsFocused();
+	const isFocused = useIsFocused();
 
 	const dataInput = {};
 
-	// useEffect(() => {
-	// 	if (isFocused) {
-	// 		console.log('Remove state');
-	// 		dispatch({type: 'signOut'});
-	// 	}
-	// }, [isFocused]);
-
-
-
-	// const userSignIn = async values => {
-	// 	setUserSigningIn(true);
-
-	// 	const cmToken = await storageService.getData('CM_TOKEN');
-
-	// 	try {
-	// 		const response = await authService.userSignIn({
-	// 			username: values.email,
-	// 			password: values.password,
-	// 			cmProvider: cmToken ? cmToken.provider : null,
-	// 			cmToken: cmToken ? cmToken.token : null
-	// 		});
-
-	// 		// NOTE: Immediately save Auth-token before any other request
-	// 		// Wait till storage gets updated
-	// 		await storageService.storeData(AUTH, response.data);
-
-	// 		const validUser = await userService.getUserDetails({
-	// 			username: values.email
-	// 		});
-
-	// 		// Wait till storage gets updated
-	// 		await storageService.storeData(USER, validUser.data);
-
-	// 		dispatch({type: 'signingIn', token: response.data, user: validUser.data, isSignedIn: true});
-
-	// 		navigateToHome();
-	// 	} catch (exception) {
-	// 		showMessage({
-	// 			message: exception.error,
-	// 			type: 'danger',
-	// 			duration: 3000
-	// 		});
-	// 	} finally {
-	// 		setUserSigningIn(false);
-	// 	}
-	// };
-
-	const userSignIn = (values) => {};
-
-	// const navigateToHome = () => {
-	// 	if (resetPassword) {
-	// 		props.navigation.replace('main');
-	// 	} else {
-	// 		dispatch({type: 'REFRESH_DATA', refreshPosts: true});
-	// 		props.navigation.goBack();
-	// 	}
-	// };
+	const userSignIn = async values => {
+		const user = await StorageService.getData('USER');
+		if (user.email === values.email && user.password === values.password){
+			props.navigation.replace('main');
+			dispatch({type: SET_SIGN_IN_STATE});
+		} else {
+			showMessage({
+				message: 'Invalid email and password',
+				type: 'danger',
+				duration: 5000
+			});
+		}
+	};
 
 	const validationSchema = yup.object().shape({
 		email: yup.string().email('Should be a valid email').required('Email is required'),
 		password: yup.string().required('Password is required')
 	});
+
+	useEffect(() => {
+		if (isFocused) {
+			if (isSignedIn){
+				props.navigation.replace('main');
+			} else {
+				console.log('Remove state');
+				dispatch({type: SET_SIGN_OUT_STATE});
+			}
+		}
+	}, [isFocused]);
 
 
 	return (
@@ -127,7 +94,7 @@ const SignIn = props => {
 									<MaterialCommunityIcons
 										name="email"
 										size={20}
-										color={colors.primaryBlue}
+										color={Colors.primaryBlue}
 									/>
 									<TextInput
 										keyboardType={'email-address'}
@@ -148,7 +115,7 @@ const SignIn = props => {
 									<MaterialCommunityIcons
 										name="lock"
 										size={20}
-										color={colors.primaryBlue}
+										color={Colors.primaryBlue}
 									/>
 									<TextInput
 										ref={input => {
@@ -171,7 +138,7 @@ const SignIn = props => {
 										<MaterialCommunityIcons
 											name="eye"
 											size={20}
-											color={colors.primaryFont}
+											color={Colors.primaryFont}
 										/>
 									</TouchableOpacity>
 								</View>
@@ -183,9 +150,9 @@ const SignIn = props => {
 									<SquareButton
 										isDisable={userSigningIn}
 										onPress={handleSubmit}
-										backgroundColor={colors.primaryBlue}
+										backgroundColor={Colors.primaryBlue}
 										fontSize={22}
-										fontColor={colors.white}
+										fontColor={Colors.white}
 										text={userSigningIn ? 'Signing in...' : 'Sign in'}
 									/>
 								</View>
@@ -197,7 +164,7 @@ const SignIn = props => {
 				<View style={styles.footerView}>
 					<View style={styles.registerView}>
 						<Text style={styles.registerText}>Don't have an account? </Text>
-						<TouchableOpacity disabled={userSigningIn} onPress={() => props.navigation.navigate('register')}>
+						<TouchableOpacity disabled={userSigningIn} onPress={() => props.navigation.navigate('signUp')}>
 							<Text style={styles.register}>Register</Text>
 						</TouchableOpacity>
 					</View>

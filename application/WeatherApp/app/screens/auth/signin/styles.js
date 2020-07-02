@@ -8,12 +8,12 @@
  * @version      0.1.0 2020-Jun-29
  */
 import { StyleSheet } from 'react-native';
-import { colors, fonts } from '../../../util';
+import { Colors, Fonts } from '../../../util';
 
 const styles = StyleSheet.create({
 	signInContainer: {
 		flex: 1,
-		backgroundColor: colors.white
+		backgroundColor: Colors.white
 	},
 
 	signInView: {
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 	headerText: {
 		textAlign: 'center',
 		fontSize: 28,
-		color: colors.primaryBlue,
+		color: Colors.black,
 		fontWeight: 'bold'
 	},
 
@@ -46,26 +46,26 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		alignItems: 'center',
 		borderBottomWidth: 1,
-		borderBottomColor: colors.primaryFont
+		borderBottomColor: Colors.primaryFont
 	},
 
 	emailInput: {
 		marginLeft: 10,
 		fontSize: 16,
-		color: colors.primaryIcon,
+		color: Colors.primaryIcon,
 		width: '90%'
 	},
 
 	passwordInput: {
 		marginLeft: 10,
 		fontSize: 16,
-		color: colors.primaryIcon,
+		color: Colors.primaryIcon,
 		width: '80%'
 	},
 
 	textError: {
-		fontSize: fonts.small,
-		color: colors.errorRed
+		fontSize: Fonts.small,
+		color: Colors.errorRed
 	},
 
 	passwordShow: {
@@ -99,12 +99,12 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		width: '30%',
 		height: 12,
-		borderColor: colors.primaryFont
+		borderColor: Colors.primaryFont
 	},
 
 	dividerText: {
 		alignSelf: 'center',
-		color: colors.primaryFont,
+		color: Colors.primaryFont,
 		paddingHorizontal: 15
 	},
 
@@ -121,12 +121,12 @@ const styles = StyleSheet.create({
 	},
 
 	registerText: {
-		color: colors.primaryFont,
+		color: Colors.primaryFont,
 		fontSize: 16
 	},
 
 	register: {
-		color: colors.primaryColour,
+		color: Colors.primaryColour,
 		fontSize: 16,
 		fontWeight: 'bold'
 	},

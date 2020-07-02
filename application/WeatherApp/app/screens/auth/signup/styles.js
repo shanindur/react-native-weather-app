@@ -8,14 +8,14 @@
  * @version      0.1.0 2020-Jun-29
  */
 import { StyleSheet, Dimensions } from 'react-native';
-import { colors, fonts } from '../../../util';
+import { Colors, Fonts } from '../../../util';
 
 const { width } = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
 	signUpContainer: {
 		flex: 1,
-		backgroundColor: colors.white
+		backgroundColor: Colors.white
 	},
 
 	signUpView: {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 	headerText: {
 		textAlign: 'center',
 		fontSize: 28,
-		color: colors.primaryBlue,
+		color: Colors.primaryBlue,
 		fontWeight: 'bold'
 	},
 
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
 	},
 
 	textError: {
-		fontSize: fonts.small,
-		color: colors.errorRed
+		fontSize: Fonts.small,
+		color: Colors.errorRed
 	},
 
 	inputView: {
@@ -49,16 +49,28 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		alignItems: 'center',
 		borderBottomWidth: 1,
-		borderBottomColor: colors.primaryFont
+		borderBottomColor: Colors.primaryFont
 	},
 
 	textInput: {
 		marginLeft: 10,
 		fontSize: 16,
-		color: colors.primaryIcon,
+		color: Colors.primaryIcon,
 		width: '90%'
 	},
 
+	passwordShow: {
+		height: 50,
+		width: 50,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	passwordInput: {
+		marginLeft: 10,
+		fontSize: 16,
+		color: Colors.primaryIcon,
+		width: '80%'
+	},
 	emptySpace: {
 		height: 20
 	},
@@ -70,7 +82,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		alignItems: 'center',
 		borderBottomWidth: 1,
-		borderBottomColor: colors.primaryFont
+		borderBottomColor: Colors.primaryFont
 	},
 
 	imageSelectTouchable: {
@@ -96,12 +108,12 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		width: '30%',
 		height: 12,
-		borderColor: colors.primaryFont
+		borderColor: Colors.primaryFont
 	},
 
 	dividerText: {
 		alignSelf: 'center',
-		color: colors.primaryFont,
+		color: Colors.primaryFont,
 		paddingHorizontal: 15
 	},
 	signInView: {
@@ -111,12 +123,12 @@ const styles = StyleSheet.create({
 	},
 
 	signInText: {
-		color: colors.primaryFont,
+		color: Colors.primaryFont,
 		fontSize: 16
 	},
 
 	signIn: {
-		color: colors.primaryColour,
+		color: Colors.primaryColour,
 		fontSize: 16,
 		fontWeight: 'bold'
 	}

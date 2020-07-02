@@ -7,29 +7,25 @@
  *
  * @version      0.1.0 2020-Jun-30
  */
-import React, { useState, useEffect, useRef } from 'react';
-import { SafeAreaView, View, Text, TextInput, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, TextInput, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { getUniqueId } from 'react-native-device-info';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { showMessage } from 'react-native-flash-message';
-import RNFetchBlob from 'react-native-fetch-blob';
+import {StorageService} from '../../../services';
 
 import { SquareButton, ImageCapture } from '../../../components';
-import { colors } from '../../../util';
-// import { useStore } from '../../../store';
+import { Colors } from '../../../util';
 import styles from './styles';
 
 const SignUp = props => {
-	// const { state } = useStore();
-
-	// const { deviceLocation } = state;
 	const [image, setImage] = useState('');
 	const [openImageCapture, setOpenImageCapture] = useState(false);
 	const [creatingUser, setCreatingUser] = useState(false);
+	const [ showPassword, setShowPassword ] = useState(false);
 
 	const dataInput = {};
 
@@ -41,9 +37,7 @@ const SignUp = props => {
 			.matches(/^(?:[0-9] ?){6,15}[0-9]$/, 'Enter a valid phone number')
 			.required('Mobile number is required').typeError('You must specify a number'),
 		email: yup.string().email('Should be a valid email').required('Email is required'),
-		password: yup.string().required('Password is required'),
-		passwordConfirmation: yup.string().required('Password confirmation is required').oneOf([yup.ref('password'), null], "Passwords doesn't match")
-
+		password: yup.string().required('Password is required')
 	});
 
 	const initialValues = {
@@ -51,16 +45,30 @@ const SignUp = props => {
 		lastName: '',
 		mobileNumber: null,
 		email: '',
-		password: '',
-		confirmPassword: ''
+		password: ''
 	};
 
-	useEffect(() => {
+	const saveUser = async values => {
+		setCreatingUser(true);
+		const USER = {
+			fname: values.firstName,
+			lname: values.lastName,
+			email: values.email,
+			mobile: values.mobileNumber,
+			password: values.password,
+			profile: image
+		};
+		await StorageService.storeData('USER', USER);
 
-	}, []);
+		showMessage({
+			message: 'User created successfully!',
+			type: 'success',
+			duration: 5000
+		});
 
-	const submitData = () => {
-		creatingUser(true);
+		setCreatingUser(false);
+		props.navigation.navigate('signIn');
+
 	};
 
 
@@ -71,7 +79,7 @@ const SignUp = props => {
 					<Text style={styles.headerText}>Registration</Text>
 					<Formik
 						initialValues={initialValues}
-						onSubmit={values => submitData({values, image})}
+						onSubmit={values => saveUser(values)}
 						validationSchema={validationSchema}
 					>
 						{({
@@ -90,7 +98,7 @@ const SignUp = props => {
 										<FontAwesome
 											name="user-o"
 											size={20}
-											color={colors.primaryBlue}
+											color={Colors.primaryBlue}
 										/>
 										<TextInput
 											style={styles.textInput}
@@ -111,7 +119,7 @@ const SignUp = props => {
 										<FontAwesome
 											name="user-o"
 											size={20}
-											color={colors.primaryBlue}
+											color={Colors.primaryBlue}
 										/>
 										<TextInput
 											ref={input => {
@@ -135,7 +143,7 @@ const SignUp = props => {
 										<FontAwesome
 											name="phone"
 											size={20}
-											color={colors.primaryBlue}
+											color={Colors.primaryBlue}
 										/>
 										<TextInput
 											ref={input => {
@@ -160,7 +168,7 @@ const SignUp = props => {
 										<FontAwesome
 											name="envelope-o"
 											size={20}
-											color={colors.primaryBlue}
+											color={Colors.primaryBlue}
 										/>
 										<TextInput
 											ref={input => {
@@ -184,19 +192,32 @@ const SignUp = props => {
 										<FontAwesome
 											name="lock"
 											size={26}
-											color={colors.primaryBlue}
+											color={Colors.primaryBlue}
 										/>
 										<TextInput
 											ref={input => {
 												dataInput.password = input;
 											}}
-											style={styles.textInput}
+											secureTextEntry={!showPassword}
 											placeholder={'Password'}
+											style={styles.passwordInput}
 											value={values.password}
-											returnKeyType="next"
+											autoCapitalize="none"
+											returnKeyType="done"
 											onChangeText={handleChange('password')}
 											onBlur={() => setFieldTouched('password')}
+											onSubmitEditing={handleSubmit}
 										/>
+										<TouchableOpacity
+											style={styles.passwordShow}
+											onPress={() => setShowPassword(!showPassword)}
+										>
+											<MaterialCommunityIcons
+												name="eye"
+												size={20}
+												color={Colors.primaryFont}
+											/>
+										</TouchableOpacity>
 									</View>
 									<Text style={styles.textError}>
 										{touched.password && errors.password && errors.password}
@@ -210,9 +231,9 @@ const SignUp = props => {
 											<MaterialCommunityIcons
 												name="camera-iris"
 												size={22}
-												color={colors.primaryBlue}
+												color={Colors.primaryBlue}
 											/>
-											<Text style={[styles.textInput, {color: '' === image ? colors.primaryFont : colors.primaryIcon}]}>
+											<Text style={[styles.textInput, {color: '' === image ? Colors.primaryFont : Colors.primaryIcon}]}>
 												{('' === image) ? 'Select profile picture' : 'Selected'}
 											</Text>
 										</TouchableOpacity>
@@ -227,9 +248,9 @@ const SignUp = props => {
 										isDisable={creatingUser}
 										buttonWidth={'40%'}
 										onPress={handleSubmit}
-										backgroundColor={colors.primaryBlue}
+										backgroundColor={Colors.primaryBlue}
 										fontSize={20}
-										fontColor={colors.white}
+										fontColor={Colors.white}
 										text={creatingUser ? 'Creating your account...' : 'Register'}
 									/>
 								</View>
@@ -248,7 +269,7 @@ const SignUp = props => {
 				<View style={styles.footerView}>
 					<View style={styles.signInView}>
 						<Text style={styles.signInText}>Already a member? </Text>
-						<TouchableOpacity onPress={() => props.navigation.navigate('signin')}>
+						<TouchableOpacity onPress={() => props.navigation.navigate('signIn')}>
 							<Text style={styles.signIn}>Sign In</Text>
 						</TouchableOpacity>
 					</View>
