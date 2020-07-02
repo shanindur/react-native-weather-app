@@ -9,7 +9,7 @@
  */
 import { StyleSheet } from 'react-native';
 
-import { colors, fonts } from '../../util';
+import { Colors, Fonts } from '../../util';
 
 const styles = StyleSheet.create({
 	background: {
@@ -27,18 +27,18 @@ const styles = StyleSheet.create({
 		height: '40%',
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: colors.lightGrey
+		backgroundColor: Colors.lightGrey
 	},
 
 	titleText: {
-		fontSize: 5 + fonts.extraLarge,
-		color: colors.primaryColour,
+		fontSize: 5 + Fonts.extraLarge,
+		color: Colors.primaryColour,
 		fontWeight: 'bold'
 	},
 
 	bodyText: {
-		fontSize: fonts.medium,
-		color: colors.errorRed
+		fontSize: Fonts.medium,
+		color: Colors.errorRed
 	}
 });
 
