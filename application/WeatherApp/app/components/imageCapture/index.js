@@ -12,7 +12,7 @@ import { View } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 
 import {AlertModalMultiple} from '../../components';
-import { colors } from '../../util';
+import { Colors } from '../../util';
 
 const ImageCapture = ({multiple, crop, imageList, triggerImagePicker, onClose}) => {
 
@@ -68,7 +68,7 @@ const ImageCapture = ({multiple, crop, imageList, triggerImagePicker, onClose}) 
 				buttons={[
 					{id: 1, title: 'Choose From Library', action: () => openImagePicker('library')},
 					{id: 2, title: 'Take Photo', action: () => openImagePicker('camera')},
-					{id: 3, title: 'Cancel', action: () => onClose(), textColor: colors.errorRed}
+					{id: 3, title: 'Cancel', action: () => onClose(), textColor: Colors.errorRed}
 				]}
 				onCancel={() => onClose()}
 				isVisible={triggerImagePicker}
