@@ -11,19 +11,20 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 
 import { useNetInfo } from './app/hooks/NetInfo';
-import {NoInternet, SplashScreen} from './app/screens';
+import {NoInternet, SplashScreen, SignUpScreen, SignInScreen, ProfileScreen, MainScreen} from './app/screens';
 import { Provider } from 'react-redux';
-import store from './app/store';
-import { colors } from './app/util';
+import {Store} from './app/redux';
+import { Colors } from './app/util';
 import FlashMessage from 'react-native-flash-message';
+import MainNavigator from './app/navigation/navigator';
 
 const App = () => {
 	const netInfo = useNetInfo();
 
 	return (
-		<Provider store={store}>
-			<StatusBar backgroundColor={colors.primaryBlue}/>
-			{(netInfo.isConnected) ? <SplashScreen /> : <NoInternet />}
+		<Provider store={Store}>
+			<StatusBar backgroundColor={Colors.primaryColour}/>
+			{(netInfo.isConnected) ? <MainNavigator /> : <NoInternet />}
 			<FlashMessage position="top" />
 		</Provider>
 	);

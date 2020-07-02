@@ -1,37 +1,10 @@
-const urls = {
-	help: 'http://omobio.net',
-	terms: 'https://www.google.com'
-};
+const CURRENT_URL = 'http://api.openweathermap.org/data/2.5/weather';
+const MONTHLY_URL = 'https://pro.openweathermap.org/data/2.5/climate/month';
 
-const http = {
-	POST: 'POST',
-	GET: 'GET',
-	PUT: 'PUT',
-	DELETE: 'DELETE'
-};
-
-const dataModel = {
-	USER: 'USER',
-	AUTH: 'AUTH'
-};
-
-const defaultPostType = {
-	DEFAULT_POST_TYPE: 'DEFAULT_POST_TYPE'
-};
-
-// Index matches `registrationProviders`
-const appKeys = [
-	null, // Dummy, added just to make this a valid array
-	null,
-	'608812737725-u8dt1hq7q15kc1rpi3621s6jinm38lnu.apps.googleusercontent.com', // TODO: Read from `google-services.json::client.oauth_client.client_id`
-	null
-];
-
+const API_KEY = ['99e38d95506b479f30abc80d06713db7', 'b1b15e88fa797225412429c1c50c122a1'];
 
 export default {
-	urls,
-	http,
-	dataModel,
-	defaultPostType,
-	appKeys
+	CURRENT_URL,
+	MONTHLY_URL,
+	API_KEY
 };
