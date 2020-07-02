@@ -11,7 +11,7 @@ import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
 import propTypes from 'prop-types';
 import styles from './style';
-import {colors, fonts, appStyle} from '../../../util';
+import {Colors, Fonts, AppStyle} from '../../../util';
 
 const SquareButton = props => {
 	const {touchableOpacityStyle, textStyle} = styles(props);
@@ -25,16 +25,16 @@ const SquareButton = props => {
 			disabled={props.isDisable}
 			activeOpacity={0.8}
 			onPress={buttonClick}
-			style={[touchableOpacityStyle, props.isDisable ? null : appStyle.shadow]}>
+			style={[touchableOpacityStyle, props.isDisable ? null : AppStyle.shadow]}>
 			<Text style={textStyle} numberOfLines={2}>{props.text}</Text>
 		</TouchableOpacity>
 	);
 };
 
 SquareButton.defaultProps = {
-	fontColor: colors.primaryFont,
-	backgroundColor: colors.primaryColour,
-	fontSize: fonts.medium,
+	fontColor: Colors.primaryFont,
+	backgroundColor: Colors.primaryColour,
+	fontSize: Fonts.medium,
 	rounded: false,
 	buttonWidth: '60%',
 	isDisable: false

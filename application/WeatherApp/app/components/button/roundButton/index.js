@@ -13,7 +13,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import propTypes from 'prop-types';
 
 import styles from './style';
-import { colors } from '../../../util';
+import { Colors } from '../../../util';
 
 
 const RoundButton = props => {
@@ -39,7 +39,7 @@ const RoundButton = props => {
 			{(props.addIcon) &&
 				<View style={addIcon}>
 					<FontAwesome
-						color={colors.primaryBlue}
+						color={Colors.primaryBlue}
 						name="plus"
 						size={20}
 					/>
@@ -53,8 +53,8 @@ export default RoundButton;
 
 
 RoundButton.defaultProps = {
-	iconColor: colors.primaryIcon,
-	backgroundColor: colors.white,
+	iconColor: Colors.primaryIcon,
+	backgroundColor: Colors.white,
 	size: 40,
 	iconSize: 20,
 	addIcon: false

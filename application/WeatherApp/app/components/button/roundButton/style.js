@@ -8,7 +8,7 @@
  * @version      0.1.0 2020-Jul-01
  */
 import {StyleSheet} from 'react-native';
-import {appStyle, colors} from '../../../util';
+import {AppStyle, Colors} from '../../../util';
 
 const styles = styleProps =>
 	StyleSheet.create({
@@ -19,13 +19,13 @@ const styles = styleProps =>
 			height: styleProps.size,
 			alignItems: 'center',
 			justifyContent: 'center',
-			...appStyle.shadow
+			...AppStyle.shadow
 		},
 		addIcon: {
 			position: 'absolute',
 			right: -7,
 			bottom: -10,
-			backgroundColor: colors.lightBlue,
+			backgroundColor: Colors.lightBlue,
 			width: 25,
 			height: 25,
 			justifyContent: 'center',
