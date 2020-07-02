@@ -1,19 +1,18 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ProfileScreen, SignInScreen, SignUpScreen } from '../screens';
-import RightDrawer from './drawerNavigator';
+import { MainScreen, ProfileScreen, SignInScreen, SignUpScreen } from '../screens';
 
 const MainStackNav = createStackNavigator();
 
 const MainStack = () => (
 	<MainStackNav.Navigator
-		initialRouteName="main"
+		initialRouteName= "signIn"
 	>
 		<MainStackNav.Screen
 			options={{
 				headerShown: false
 			}}
-			name="main" component={RightDrawer}
+			name="main" component={MainScreen}
 		/>
 		<MainStackNav.Screen
 			options={{
