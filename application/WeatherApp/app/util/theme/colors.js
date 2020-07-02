@@ -3,6 +3,7 @@ export default {
 	secondaryColour: '#FFFFFF',
 	white: '#FFFFFF',
 	black: '#000000',
+	graphGradientFrom: '#4E0A7F',
 
 	primaryFont: '#9ea3ac',
 	primaryIcon: '#6c6c74',
