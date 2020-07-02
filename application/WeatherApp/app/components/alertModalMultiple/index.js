@@ -13,7 +13,7 @@ import propTypes from 'prop-types';
 import Modal from 'react-native-modal';
 
 import styles from './style';
-import { colors } from '../../util';
+import { Colors } from '../../util';
 
 const AlertModalMultiple = ({buttons, heading, subHeading, isVisible, onCancel}) => (
 	<Modal
@@ -38,7 +38,7 @@ const AlertModalMultiple = ({buttons, heading, subHeading, isVisible, onCancel})
 				{
 					buttons.map(item => (
 						<TouchableOpacity key={item.id} style={styles.button} onPress={() => item.action()}>
-							<Text style={[styles.buttonText, {color: item.textColor || colors.primaryBlue}]}>{item.title}</Text>
+							<Text style={[styles.buttonText, {color: item.textColor || Colors.primaryBlue}]}>{item.title}</Text>
 						</TouchableOpacity>
 					))
 				}

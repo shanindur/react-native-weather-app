@@ -8,11 +8,11 @@
  * @version      0.1.0 2020-Jul-01
  */
 import { StyleSheet } from 'react-native';
-import { colors } from '../../util';
+import { Colors } from '../../util';
 
 const styles = StyleSheet.create({
 	contentWrapper: {
-		backgroundColor: colors.white,
+		backgroundColor: Colors.white,
 		alignSelf: 'center',
 		borderRadius: 15,
 		width: '90%',
