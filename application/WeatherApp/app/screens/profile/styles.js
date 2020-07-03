@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
 	},
 	signOut: {
 		fontSize: Fonts.extraLarge,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		color: Colors.primaryColour
 	},
 	photoView: {
 		padding: 10

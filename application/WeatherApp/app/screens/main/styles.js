@@ -7,7 +7,7 @@
  *
  * @version      0.1.0 2020-Jul-01
  */
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import {Colors, Fonts} from '../../util';
 
 const styles = StyleSheet.create({
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 	headerView: {
 		backgroundColor: Colors.primaryColour,
 		paddingVertical: 30,
-		height: 515
+		height: Dimensions.get('window').height * 0.68
 	},
 	title: {
 		fontSize: Fonts.xxLarge,
@@ -68,6 +68,9 @@ const styles = StyleSheet.create({
 	headerData: {
 		flexDirection: 'column',
 		width: '33%'
+	},
+	buttonView: {
+		alignItems: 'center'
 	},
 	graph: {
 		marginTop: 1

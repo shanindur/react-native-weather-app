@@ -48,7 +48,7 @@ const Profile = props => {
 
 	const dispatch = useDispatch();
 
-	const editProfilePicture = async () => {
+	const editProfilePicture = () => {
 		ImagePicker.showImagePicker(options, (response) => {
 			if (response.didCancel) {
 				// console.log('User cancelled image picker');
@@ -63,6 +63,7 @@ const Profile = props => {
 				// console.log('User tapped custom button: ', response.customButton);
 			} else {
 				setProImage(`data:image/webp;base64,${response.data}`);
+				saveUser();
 			}
 		});
 	};
@@ -82,6 +83,7 @@ const Profile = props => {
 			type: 'success',
 			duration: 5000
 		});
+		getUserData();
 
 	};
 
@@ -98,13 +100,17 @@ const Profile = props => {
 
 	useEffect(() => {
 		getUserData();
+		return () => {
+			getUserData();
+			saveUser();
+		};
 	}, [isFocused]);
 
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.headerView}>
 				<TouchableOpacity onPress={() => props.navigation.goBack()} style={{width:'90%'}}>
-					<Icon name={'arrow-left'} size={20} />
+					<Icon color={Colors.primaryColour} name={'arrow-left'} size={20} />
 				</TouchableOpacity>
 				<TouchableOpacity onPress={() => {props.navigation.replace('signIn'); dispatch({type: SET_SIGN_OUT_STATE});} }>
 					<Text style={styles.signOut}>Logout</Text>

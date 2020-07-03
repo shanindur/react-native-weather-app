@@ -50,14 +50,17 @@ const SignUp = props => {
 
 	const saveUser = async values => {
 		setCreatingUser(true);
+		const AUTH = {
+			email: values.email,
+			password: values.password
+		};
 		const USER = {
 			fname: values.firstName,
 			lname: values.lastName,
-			email: values.email,
 			mobile: values.mobileNumber,
-			password: values.password,
 			profile: image
 		};
+		await StorageService.storeData('AUTH', AUTH);
 		await StorageService.storeData('USER', USER);
 
 		showMessage({
