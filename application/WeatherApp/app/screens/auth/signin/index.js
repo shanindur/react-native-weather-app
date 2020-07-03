@@ -9,7 +9,7 @@
  */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SafeAreaView, View, Text, TextInput, Image, TouchableOpacity, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, Image, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { showMessage } from 'react-native-flash-message';
 import * as yup from 'yup';
@@ -34,16 +34,19 @@ const SignIn = props => {
 	const dataInput = {};
 
 	const userSignIn = async values => {
-		const user = await StorageService.getData('USER');
-		if (user.email === values.email && user.password === values.password){
-			props.navigation.replace('main');
+		setUserSigningIn(true);
+		const auth = await StorageService.getData('AUTH');
+		if (auth.email === values.email && auth.password === values.password){
 			dispatch({type: SET_SIGN_IN_STATE});
+			setUserSigningIn(false);
+			props.navigation.replace('main');
 		} else {
 			showMessage({
 				message: 'Invalid email and password',
 				type: 'danger',
 				duration: 5000
 			});
+			setUserSigningIn(false);
 		}
 	};
 
@@ -61,6 +64,9 @@ const SignIn = props => {
 				dispatch({type: SET_SIGN_OUT_STATE});
 			}
 		}
+		return () => {
+			userSignIn();
+		};
 	}, [isFocused]);
 
 
